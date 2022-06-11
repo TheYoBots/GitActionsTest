@@ -1,0 +1,21 @@
+name: Test
+
+on:
+  schedule:
+    - cron: "0 0 23 * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: testing a commit?
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+      - name: Commit & Push
+        run: |
+          git config user.name TheYoBots
+          git config user.email 73843275+TheYoBots@users.noreply.github.com
+          git commit --allow-empty -m "Made an empty commit?!"
+          git push --force
